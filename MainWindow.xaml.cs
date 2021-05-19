@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GameOfThrones.DelegateAndEvents;
 
 namespace GameOfThrones
 {
@@ -23,6 +24,30 @@ namespace GameOfThrones
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var hardHome = new HardhomeBattleV2();
+            //hardHome.HardhomeEldersMeetingEvent();
+            hardHome.HardhomeEldersMeetingEvent += () =>
+            {
+                MessageBox.Show("I got notified that Hardhome elders meeting had occurred","V2");
+            };
+            hardHome.StartAct();
+            MessageBox.Show(hardHome.ActStarted.ToString(),"V2");
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var hardHome = new HardhomeBattleV1();
+            //hardHome.HardhomeEldersMeetingDelegate();
+            hardHome.HardhomeEldersMeetingDelegate += () =>
+            {
+                MessageBox.Show("I got notified that Hardhome elders meeting had occurred","V1");
+            };
+            hardHome.StartAct();
+            MessageBox.Show(hardHome.ActStarted.ToString(),"V1");
         }
     }
 }
